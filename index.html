@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+  <!-- START Navigation -->
+<div class="menu">
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <div class="home-icon">Budget.com</div>
+      </ul>
+</div>
+  <!-- END Navigation -->
+
+  <!-- START Hero Banner -->
+<div class="content-container">
+    <h1 class="homepage-hero-title">Home Loan Calculator</h1>
+    <p class="homepage-hero-text">Use this calculator to budget for your home loan, and calculate your future home loan repayments.
+</p> 
+</div>
+<div class="arrow bounce">
+    <img class="arrow-image" src="images/angle-down-solid.svg">
+  </div>
+  <!-- END Hero Banner -->
+
+  <!-- START Calculator Tabs -->
+<div class="sub-menu">
+<div class="row">
+    <div class="column column-1 tablink budget" onclick="openTab(event,'Budget')">
+      <h4> Weekly Budget Calculator</h4>
+      <p><u>Calculate Now</u></p>
+    </div>
+    <div class="column column-2 tab-active tablink home"  onclick="openTab(event,'Home')">
+      <h4>Home Loan Repayment Calculator</h4>
+      <p><u>Calculate Now</u></p>
+    </div>
+    <div class="column column-3 tablink car" onclick="openTab(event,'Car')">
+      <h4>Car Loan Repayment Calculator</h4>
+      <p><u>Calculate Now</u></p>
+    </div>
+  </div>
+</div>
+
+<!-- END Calculator Tabs -->
+
+<!-- START Calculator Tab Content -->
+<div class="calculator-container">
+  <!-- START Budget Tab Content -->
+    <div id="Budget" class="Tab" style="display:none">
+        <p>&nbsp;</p>
+        <h3>We're sorry, this calculator is still being built.</h3>
+        <p onclick="openTab(event,'Home')"><u>Back to Home</u></p>
+      </div>
+    <!-- END Budget Tab Content -->  
+
+    <!-- START Home Tab Content -->  
+      <div id="Home" class="Tab">
+        <p>&nbsp;</p> 
+        <h2>Home Loan Repayment Calculator</h2>
+        <div class="row-homeTab">
+          <div class="column-homeTab">
+            <h4>Step 1: Add your loan &amp; personal details</h4>
+              <form id='formStepOne' action="/" method="post">
+                <p id="StepOneTitle">Personal Details</p>
+                <span id="formInputContent">Full Name <input type="text" class="loanDetails" name="loanDetails" id="customerName" placeholder="John Smith"></span><br>
+                <span id="formInputContent">Savings $<input type="number" class="loanDetails" name="loanDetails" id="Savings" placeholder="20000"></span><br>
+                <span id="formInputContent">Monthly Salary $<input type="number" class="loanDetails" name="loanDetails" id="monthlySalary" placeholder="90000"></span><br>
+                <p id="StepOneTitle">Loan Details</p>
+                <span id="formInputContent"> Home Loan Amount $<input type="number" class="loanDetails" name="loanDetails" id="loanAmount" placeholder="600000"></span><br>
+                <span id="formInputContent">Home Loan Term (yrs) <input type="number" class="loanDetails" name="loanDetails" id="loanTerm" placeholder="30"></span><br>
+                <span id="formInputContent">Interest Rate <input type="number" class="loanDetails" name="loanDetails" id="interestRate" placeholder="4.5"></span><br>
+                <span id="formInputContent">Loan Type <input type="text" class="loanDetails" name="loanDetails" id="loanType" value="Interest Only" readonly></span><br> 
+                </form>
+              </form>
+
+          </div>
+          <div class="column-homeTab">
+            <h4>Step 2: Add your monthly expenses below</h4>
+            <form id='formStepTwo' action="/" method="post">
+              <p>Everyday Living Costs</p>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Groceries">per month</span><br>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Fuel">per month</span><br>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Entertainment">per month</span><br>
+              <p>Ongoing Bills &amp; Maintenance Costs</p>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Water">per month</span><br>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Electricity">per month</span><br>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Rent">per month</span><br>
+              <p>Loans, Credit Cards &amp; Other Expenses</p>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Car Finance">per month</span><br>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Personal Loan">per month</span><br>
+              <span id="formInputContent"> $<input type="number"  onblur="findTotal()" class="expenseInput" name="Expenses" placeholder="Credit Cards">per month</span><br>
+            </form>
+            
+            <p class="totalExpenses">Total Monthly Expenses<br />
+              <span id="totalExpensesCalcInput">$<input type="text" name="totalordercost" id="totalordercost" /></span>
+            </p>
+
+          </div>
+          <div class="column-homeTab">
+            <h4>Step 3: Calculate your costs!</h4>
+            <p>Find out how much your monthly repayments will be, and how much you'll have left over.</p>
+            <button onclick="calculateTotalMonthlyRepaymentAmount()" class="btn-primary calculator">Calculate</button><br>
+
+            <div id="resultsContainer">
+            <p id="successfulResult" style="display:none"><b>Looking good! You have enough money to cover the costs of your home loan repayments, <span id="successtotalLeftOver"></b></p>
+            <p id="failedResult" style="display:none"><b>Sorry! You don't have enough funds to cover this home loan amount. Please enter a lower home loan amount and try again.</b></p>
+            <table>
+              <p id="resultText"></p>
+              <tr>
+                <td>Monthly Repayment Amount:</td>
+                <td>$<span id="totalMonthlyRepaymentAmount"></span></td>
+              </tr>
+              <tr>
+                <td>Total Salary After Expenses:</td>
+                <td>$<span id="leftOverMoney"></span></td>
+              </tr>
+              <tr>
+                <td>Total Left Over:</td>
+                <td>$<span id="totalLeftOver"></span></td>
+              </tr>
+              </table>
+              <button class="btn-primary btn-refresh" onClick="window.location.reload();">Start Again</button>
+            </div>
+          </div>
+        </div>   
+
+      </div>
+    <!-- END Home Tab Content -->  
+
+    <!-- Start Car Tab Content -->  
+      <div id="Car" class="Tab" style="display:none">
+        <p>&nbsp;</p>
+        <h3>We're sorry, this calculator is still being built.</h3>
+        <p onclick="openTab(event,'Home')"><u>Back to Home</u></p>
+      </div>
+    <!-- END Car Tab Content -->   
+</div>
+  <!-- END Calculator Tabs Content --> 
+
+<script src="main.js"></script>
+</body>
+</html>
